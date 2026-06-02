@@ -3,10 +3,11 @@ import { registerUser } from "../services/authService";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../components/auth/AuthLayout";
 import { Link } from "react-router-dom";
+import Loading from "../components/Loading";
 export default function Register() {
 
   const navigate = useNavigate();
-
+const [loading ,setLoading] = useState(false);
   const [formData, setFormData] =
     useState({
       fullName: "",
@@ -26,20 +27,24 @@ export default function Register() {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-
+setLoading(true);
     try {
 
       await registerUser(formData);
 
       alert("Registered Successfully");
-
+setLoading(false);
       navigate("/");
 
     } catch {
 
       alert("Registration Failed");
+      setLoading(false);
     }
   };
+  if (loading) {
+    return <Loading text="Loading ..." />;
+  }
 
   return (
     <AuthLayout>

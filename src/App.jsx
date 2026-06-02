@@ -16,6 +16,8 @@ import Categories from "./pages/admin/Categories";
 import Courses from './pages/admin/Courses';
 import Lessons from "./pages/admin/Lessons";
 import Enrollments from './pages/admin/Enrollments';
+import CourseLessons from "./pages/admin/CourseLessons";
+
 function App() {
 
  return (
@@ -35,6 +37,10 @@ function App() {
   path="/admin/courses"
   element={<Courses />}
 />
+  <Route
+    path="/admin/courses/:id"
+    element={<CourseLessons />}
+  />
 <Route
     path="/admin/categories"
     element={<Categories />}

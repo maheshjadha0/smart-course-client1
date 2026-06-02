@@ -7,10 +7,12 @@ import { getCourses, deleteCourse } from "../../api/courseApi";
 import CourseModal from "../../components/CourseModal";
 
 import { getCategories } from "../../api/categoryApi";
+import { useNavigate } from "react-router-dom";
+
 
 function Courses() {
   const [courses, setCourses] = useState([]);
-
+const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
@@ -181,14 +183,11 @@ function Courses() {
 
         {filteredCourses.map((course) => (
 
-          <tr
-            key={course.id}
-            className="
-              border-t
-              hover:bg-slate-50
-              transition
-            "
-          >
+         <tr
+  key={course.id}
+ 
+  className="cursor-pointer border-t hover:bg-slate-50"
+>
 
             {/* Thumbnail + Title */}
 
@@ -213,7 +212,10 @@ function Courses() {
 
                 <div>
 
-                  <h3 className="font-semibold text-slate-800">
+                  <h3 
+                  onClick={() => navigate(`/admin/courses/${course.id}`)}
+                   className="font-semibold text-slate-800 cursor-pointer hover:text-purple-600"
+                  >
                     {course.title}
                   </h3>
 

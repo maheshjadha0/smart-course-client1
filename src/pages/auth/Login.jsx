@@ -2,11 +2,11 @@ import { useState } from "react";
 import { loginUser } from "../../services/authService"; 
 import { useNavigate, Link } from "react-router-dom";
 import AuthLayout from "../../components/auth/AuthLayout";
-
+import Loading from "../../components/Loading";
 export default function Login() {
 
   const navigate = useNavigate();
-
+ const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -22,7 +22,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-
+setLoading(true);
     try {
 
       const response =
@@ -43,14 +43,19 @@ export default function Login() {
         "email",
         response.data.email
       );
-
+setLoading(false);
       navigate("/admin/dashboard");
 
     } catch {
-
+ setLoading(false)
       alert("Invalid credentials");
     }
   };
+
+
+    if (loading) {
+    return <Loading text="Loading ..." />;
+  }
 
   return (
 
